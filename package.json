@@ -18,5 +18,14 @@
     "passport-jwt": "*"
   },
   "author": "Brad Traversy",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haticedastan/studentoverflow.git"
+  },
+  "bugs": {
+    "url": "https://github.com/haticedastan/studentoverflow/issues"
+  },
+  "homepage": "https://github.com/haticedastan/studentoverflow#readme"
 }

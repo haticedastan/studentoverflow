@@ -16,14 +16,14 @@ router.post('/register', (req, res, next) => {
 
   User.addUser(newUser, (err, user) => {
     if(err){
-      res.json({success: false, msg:'Failed to register user'});
+      res.json({success: false, msg:'Kullanıcı kaydedilmedi'});
     } else {
-      res.json({success: true, msg:'User registered'});
+      res.json({success: true, msg:'Kullanıcı kayıt edildi'});
     }
   });
 });
 
-// Authenticate
+// Doğrulama
 router.post('/authenticate', (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
@@ -31,14 +31,14 @@ router.post('/authenticate', (req, res, next) => {
   User.getUserByUsername(username, (err, user) => {
     if(err) throw err;
     if(!user){
-      return res.json({success: false, msg: 'User not found'});
+      return res.json({success: false, msg: 'Kullanıcı bulunamadı'});
     }
 
     User.comparePassword(password, user.password, (err, isMatch) => {
       if(err) throw err;
       if(isMatch){
         const token = jwt.sign(user, config.secret, {
-          expiresIn: 604800 // 1 week
+          expiresIn: 604800 
         });
 
         res.json({
@@ -52,13 +52,13 @@ router.post('/authenticate', (req, res, next) => {
           }
         });
       } else {
-        return res.json({success: false, msg: 'Wrong password'});
+        return res.json({success: false, msg: 'Pasaport yanlış'});
       }
     });
   });
 });
 
-// Profile
+// Profil
 router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
   res.json({user: req.user});
 });
